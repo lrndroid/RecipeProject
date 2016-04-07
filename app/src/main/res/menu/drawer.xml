@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <group android:id="@+id/a" android:checkableBehavior="single"
+        >
+    <item android:id="@+id/home_screen"
+        android:icon="@drawable/ic_home_black"
+        android:title="@string/home"/>
+        </group>
+    <group  android:id="@+id/b" android:checkableBehavior="single">
+    <item android:id="@+id/shopping_list"
+        android:icon="@drawable/ic_list_black"
+        android:title="@string/shopping_list"/>
+<!--    <item android:id="@+id/manage_category"
+        android:icon="@drawable/ic_manage"
+        android:title="@string/manage_category"/>-->
+        </group>
+    <group android:id="@+id/c" android:checkableBehavior="single">
+    <item android:id="@+id/import_export"
+        android:icon="@drawable/ic_import_export"
+        android:title="@string/importR"/>
+        </group>
+    <group android:id="@+id/d" android:checkableBehavior="single">
+        <item android:id="@+id/backup"
+            android:icon="@drawable/ic_backup"
+            android:title="@string/backup"/>
+    </group>
+</menu>

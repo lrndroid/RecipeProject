@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.simbiosys.avatar.cooknstore.RecipeDetailsView">
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appBar"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+<!--
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:layout_gravity="center_horizontal"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+-->
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/abs_layout" />
+    </android.support.design.widget.AppBarLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout1"
+            android:orientation="vertical"
+            android:layout_below="@+id/appBar">
+<!--            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/titleText"
+
+                android:layout_gravity="center"
+                android:textAppearance="@android:style/TextAppearance.Large" />-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/timeText"
+                android:layout_gravity="center"
+                android:paddingTop="5dp"
+                android:textAppearance="@android:style/TextAppearance.Medium" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/servesText"
+                android:layout_gravity="center"
+                android:textAppearance="@android:style/TextAppearance.Medium" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:padding="5dp"
+                android:layout_height="200dp"
+                android:id="@+id/recipeImage"
+                android:src="@drawable/defaultpic"
+                android:contentDescription="@string/Recipe" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/layout1"
+            android:padding = "10dp"
+            android:layout_height="match_parent"
+           >
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:background="@drawable/layout_toggle_background"
+                >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Ingredients"
+                android:id="@+id/ingredientsToggleText"
+                android:textAppearance="@android:style/TextAppearance.Medium" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"
+                android:id="@+id/shopping_list"
+                android:src="@drawable/ic_shopping_cart"
+                android:clickable="true"
+                android:layout_gravity="center|right"
+                android:foregroundGravity="center_vertical|right"
+                android:onClick="onShoppingList"/>
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_keyboard_arrow_down"
+                    android:id="@+id/upArrow"
+                    android:layout_gravity="right"
+                    android:clickable="true"
+                    android:foregroundGravity="center_vertical|right"
+                    android:onClick="toggleIngredients"/>
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_keyboard_arrow_up"
+                    android:id="@+id/downArrow"
+                    android:layout_gravity="right"
+                android:clickable="true"
+
+                android:foregroundGravity="center_vertical|right"
+                android:onClick="toggleIngredients"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ingredientsText"
+                android:layout_margin="5dp"
+                android:layout_gravity="top" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:padding="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/layout_toggle_background"
+                android:onClick="toggleDirections">
+
+                <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Directions"
+                android:id="@+id/directionsToggleText"
+                android:textAppearance="@android:style/TextAppearance.Medium" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_keyboard_arrow_down"
+                    android:id="@+id/upArrowDirection"
+                    android:layout_gravity="right"
+                    android:foregroundGravity="center_vertical|right" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_keyboard_arrow_up"
+                    android:id="@+id/downArrowDirection"
+                    android:layout_gravity="right"
+                    android:foregroundGravity="center_vertical|right" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:id="@+id/directionsText"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

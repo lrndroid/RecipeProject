@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.poorni.project.cooknstore">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.poorni.project.cooknstore.fileprovider.READ" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <!--        <provider
+                    android:name="android.support.v4.content.FileProvider"
+                    android:authorities="com.simbiosys.avatar.cooknstore.fileprovider"
+                    android:exported="false"
+                    android:grantUriPermissions="true"
+                    android:readPermission="com.simbiosys.avatar.cooknstore.fileprovider.READ">
+                    <meta-data
+                        android:name="android.support.FILE_PROVIDER_PATHS"
+                        android:resource="@xml/filepath" />
+                </provider>-->
+
+        <activity
+            android:name=".CookHome"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
+
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter android:label="@string/app_name">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="content" />
+                <data android:mimeType="text/xml" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="file" />
+                <data android:host="*" />
+                <data android:mimeType="*/*" />
+                <data android:pathPattern=".*\\.xml" />
+            </intent-filter>
+
+   </activity>
+        <activity
+            android:name=".NewRecipeActivity"
+            android:label="@string/title_activity_new_recipe"
+            android:theme="@style/AppCustomTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.poorni.project.cooknstore.CookHome" />
+        </activity>
+        <activity
+            android:name=".NewRecipeActivityNext"
+            android:label="@string/title_activity_new_recipe_activity_next"
+            android:theme="@style/AppCustomTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.poorni.project.cooknstore.NewRecipeActivity" />
+        </activity>
+
+        <activity
+            android:name=".RecipeDetailsView"
+            android:label="@string/title_activity_recipe_details_view"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.poorni.project.cooknstore.CookHome" />
+        </activity>
+        <activity
+            android:name=".ShoppingListView"
+            android:label="@string/title_activity_shopping_list_view"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.poorni.project.cooknstore.CookHome" />
+        </activity>
+        com.poorni.project.cooknstore
+        <activity
+            android:name=".NewShoppingListActivity"
+            android:label="@string/title_activity_new_shopping_list"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.poorni.project.cooknstore.ShoppingListView" />
+        </activity>
+<!--
+        <activity
+            android:name=".RecipeSearch"
+            android:label="@string/title_activity_recipe_search"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CookHome" />
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+-->
+    </application>
+
+</manifest>

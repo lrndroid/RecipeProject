@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+    <LinearLayout
+        android:id="@+id/ingredientsLayout"
+        android:orientation="vertical"
+        android:layout_below="@+id/browseLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:id="@+id/ingredientTextView"
+            android:text="@string/ingredients"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_margin="4dp"
+                android:padding="3dp"
+                android:id="@+id/ingredientEditText"
+                android:singleLine="false"
+                android:inputType="text" />
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="4dp"
+                android:padding="3dp"
+                android:id="@+id/quantityEditText"
+                android:inputType="number" />
+            <Spinner
+                android:id="@+id/unitsVolumeSpinner"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="3dp"
+                android:entries="@array/units_volume_array"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/addButton"
+                android:onClick="onAddButtonClick"
+                android:text="@string/add"
+                android:layout_margin="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/updateButton"
+                android:onClick="onUpdateButtonClick"
+                android:text="@string/edit"
+                android:layout_margin="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/deleteButton"
+                android:text="@string/delete"
+                android:onClick="onDeleteButtonClick"
+                android:layout_margin="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="#494949"
+            android:orientation="vertical">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="wrap_content"
+                android:paddingTop="10dp"
+                android:background="@drawable/text_border"
+                android:layout_height="196dp">
+
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/directionsLayout"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/ingredientsLayout"
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/directionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/directions"/>
+        <EditText
+            android:id="@+id/directionsEditText"
+            android:layout_width="match_parent"
+            android:padding="8dp"
+            android:layout_height="100dp"
+            android:background="@drawable/text_border"
+            android:inputType="textMultiLine" />
+        <Button
+            android:id="@+id/saveButton"
+            android:onClick="onSaveButtonClick"
+            android:layout_marginTop="5dp"
+            android:text="@string/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right" />
+
+    </LinearLayout>
+</RelativeLayout>
+</android.support.v4.widget.NestedScrollView>

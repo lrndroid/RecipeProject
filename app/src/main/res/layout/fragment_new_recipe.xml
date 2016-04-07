@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:id="@+id/titleLayout">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/title"
+            android:id="@+id/titleTextView"
+            android:layout_gravity="center" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="3dp"
+            android:id="@+id/titleEditText"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/categoryLayout"
+        android:padding="5dp"
+        android:layout_below="@+id/titleLayout">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/category"
+            android:id="@+id/categoryTextView"
+            android:layout_alignParentLeft="true" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="3dp"
+            android:id="@+id/categoryEditText"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/servesLayout"
+        android:padding="5dp"
+        android:layout_below="@+id/categoryLayout">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/serves"
+            android:id="@+id/servesTextView"
+            android:layout_alignParentLeft="true" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="3dp"
+            android:id="@+id/servesEditText"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/timeLayout"
+        android:padding="5dp"
+        android:layout_below="@+id/servesLayout">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/time"
+            android:id="@+id/timeTextView"
+            android:layout_alignParentLeft="true" />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="3dp"
+            android:id="@+id/hrEditText"/>
+<!--        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="3dp"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/secEditText"/>-->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timeLayout"
+        android:id="@+id/browseLayout">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/browse_picture"
+            android:id="@+id/browseTextView"
+            android:padding="10dp" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_toRightOf="@+id/browseTextView"
+            android:text="@string/gallery"
+            android:layout_marginLeft="5dp"
+
+            android:id="@+id/galleryButton"
+            android:onClick="onGalleryButtonClick"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_toRightOf="@+id/galleryButton"
+            android:text="@string/camera"
+            android:layout_marginLeft="10dp"
+
+            android:id="@+id/cameraButton"
+            android:onClick="onCameraButtonClick"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@+id/browseLayout">
+        <ImageView
+            android:id="@+id/recipeImage"
+            android:layout_below="@+id/browseTextView"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/image_bg"
+            android:layout_width="match_parent"
+            android:layout_height="250dp" />
+    </LinearLayout>
+ <!--   <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:padding="5dp"
+        android:layout_gravity="center"
+        android:layout_below="@+id/timeLayout"
+        android:id="@+id/browseLayout"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/browse_picture"
+            android:id="@+id/browseTextView"
+            android:padding="10dp" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/browseTextView"
+            android:text="@string/gallery"
+            android:layout_marginLeft="5dp"
+
+            android:id="@+id/galleryButton"
+            android:onClick="onGalleryButtonClick"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/galleryButton"
+            android:text="@string/camera"
+            android:layout_marginLeft="10dp"
+
+            android:id="@+id/cameraButton"
+            android:onClick="onCameraButtonClick"/>
+        <ImageView
+            android:id="@+id/recipeImage"
+            android:layout_below="@+id/browseTextView"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/text_border"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+    </RelativeLayout>-->
+
+</RelativeLayout>
+</android.support.v4.widget.NestedScrollView>
