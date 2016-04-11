@@ -7,9 +7,14 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.hardware.input.InputManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,13 +22,14 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
+import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
-import android.view.MenuItem;
 
 import com.poorni.project.cooknstore.data.RecipeDetailDataSet;
 import com.poorni.project.cooknstore.data.ShoppingListDataSet;
@@ -38,6 +44,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import android.net.Uri;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -174,13 +183,13 @@ public class CookHome extends AppCompatActivity implements RecipeViewAdapter.Rec
             public boolean onNavigationItemSelected(MenuItem item) {
                 if (item.getItemId() == R.id.home_screen)
                     mDrawerLayout.closeDrawer(GravityCompat.START);
-                if(item.getItemId()==R.id.shopping_list)
-                    startActivity(new Intent(getBaseContext(),ShoppingListView.class));
-                if(item.getItemId()==R.id.backup) {
+                if (item.getItemId() == R.id.shopping_list)
+                    startActivity(new Intent(getBaseContext(), ShoppingListView.class));
+                if (item.getItemId() == R.id.backup) {
                     ArrayList<RecipeStorage> storageList = new ArrayList<RecipeStorage>();
                     takeBackup(storageList);
                 }
-                if(item.getItemId()==R.id.import_export){
+                if (item.getItemId() == R.id.import_export) {
                     AlertDialog alertDialog = new AlertDialog.Builder(CookHome.this).create();
                     alertDialog.setTitle("Alert");
                     alertDialog.setMessage("You can import backed up files, opening it up by CookNStore");
@@ -189,7 +198,7 @@ public class CookHome extends AppCompatActivity implements RecipeViewAdapter.Rec
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
 
-                                dialog.cancel();
+                                    dialog.cancel();
                                 }
                             });
                     alertDialog.show();
@@ -243,6 +252,28 @@ public class CookHome extends AppCompatActivity implements RecipeViewAdapter.Rec
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_cook_home, menu);
+        MenuItem menuItem = menu.findItem(R.id.search_recipe);
+
+        //  SearchView focus issue -- Start
+        MenuItemCompat.setOnActionExpandListener(menuItem, new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                //get focus
+                item.getActionView().requestFocus();
+                //get input method
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                return true;
+            }
+        });
+        //  SearchView focus issue -- End
+
+
         SearchManager searchManager =
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView =
@@ -251,6 +282,7 @@ public class CookHome extends AppCompatActivity implements RecipeViewAdapter.Rec
                 searchManager.getSearchableInfo(new ComponentName(getApplicationContext(), CookHome.class)));
        // searchView.setSubmitButtonEnabled(true);
         searchView.setIconifiedByDefault(false);
+
         searchView.requestFocusFromTouch();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

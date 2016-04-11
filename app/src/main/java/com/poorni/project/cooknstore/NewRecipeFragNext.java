@@ -125,7 +125,7 @@ public class NewRecipeFragNext extends Fragment implements  RecipeAdapter.ClickL
 
         }
         else if(mRecipeDataSet == null){
-            mRecipeDataSet = new ArrayList<>();
+            mRecipeDataSet = (ArrayList)mRecipeDetail.getIngredientList();
           //  mRecipeDataSet.add(new IngredientDataSet("Salt", "1", "tbsp", 2));
         }
         recipeAdapter = new RecipeAdapter(getActivity().getBaseContext(),mRecipeDataSet);
@@ -165,6 +165,7 @@ public class NewRecipeFragNext extends Fragment implements  RecipeAdapter.ClickL
                 if(selectedPosition!= -1) {
                     mRecipeDataSet.remove(selectedPosition);
                     recipeAdapter.notifyItemRemoved(selectedPosition);
+                    mRecipeDetail.setIngredientList(mRecipeDataSet);
                     selectedPosition = -1;
                 }
                 else

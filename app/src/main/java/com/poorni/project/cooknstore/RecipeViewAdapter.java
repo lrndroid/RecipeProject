@@ -3,6 +3,7 @@ package com.poorni.project.cooknstore;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,22 +30,22 @@ public class RecipeViewAdapter extends RecyclerView.Adapter<RecipeViewAdapter.Re
     RecyclerView.LayoutParams mImageViewLayoutParams;
 
 
-    public RecipeViewAdapter(Context context,List<RecipeStorage> list){
+    public RecipeViewAdapter(Context context, List<RecipeStorage> list) {
         inflater = inflater.from(context);
         this.context = context;
         this.data = list;
         mImageViewLayoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
     }
+
     @Override
     public RecipeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-       View view = inflater.inflate(R.layout.recipe_cards,parent,false);
+        View view = inflater.inflate(R.layout.recipe_cards, parent, false);
         RecipeViewHolder rvh = new RecipeViewHolder(view);
         return rvh;
     }
 
-    public void setListener(RecipeViewListener listener)
-    {
+    public void setListener(RecipeViewListener listener) {
         clickListener = listener;
     }
 
@@ -52,9 +56,12 @@ public class RecipeViewAdapter extends RecyclerView.Adapter<RecipeViewAdapter.Re
         String detail = data.get(position).getDirections();
         holder.titleText.setText(title);
         holder.detailsText.setText(detail);
-        if(!image.isEmpty())
-            holder.recipeImage.setImageBitmap(getScaledBitmap(image, 100, 100));
+        if (!image.isEmpty()) {
+           // holder.recipeImage.setImageBitmap(getScaledBitmap(image, 100, 100));
+            new ImageLoadTask(image,holder.recipeImage).execute();
+        }
     }
+
     private Bitmap getScaledBitmap(String picturePath, int width, int height) {
         BitmapFactory.Options sizeOptions = new BitmapFactory.Options();
         sizeOptions.inJustDecodeBounds = true;
@@ -69,6 +76,7 @@ public class RecipeViewAdapter extends RecyclerView.Adapter<RecipeViewAdapter.Re
 
         return BitmapFactory.decodeFile(picturePath, sizeOptions);
     }
+
     private int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         // Raw height and width of image
         final int height = options.outHeight;
@@ -91,12 +99,13 @@ public class RecipeViewAdapter extends RecyclerView.Adapter<RecipeViewAdapter.Re
 
         return inSampleSize;
     }
+
     @Override
     public int getItemCount() {
         return data.size();
     }
 
-    class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView titleText;
         TextView detailsText;
@@ -115,10 +124,40 @@ public class RecipeViewAdapter extends RecyclerView.Adapter<RecipeViewAdapter.Re
 
         @Override
         public void onClick(View v) {
-            clickListener.itemClicked(v,data.get(getAdapterPosition()).getId());
+            clickListener.itemClicked(v, data.get(getAdapterPosition()).getId());
         }
     }
-    public interface RecipeViewListener{
-        public void itemClicked(View view,long position);
+
+    public interface RecipeViewListener {
+        public void itemClicked(View view, long position);
+    }
+
+    // Asynchronous Image Loading
+    private class ImageLoadTask extends AsyncTask<Void, Void, Bitmap> {
+        private String url;
+        private ImageView imageView;
+
+        public ImageLoadTask(String url, ImageView imageView) {
+            this.url = url;
+            this.imageView = imageView;
+
+        }
+
+        @Override
+        protected Bitmap doInBackground(Void... params) {
+            try {
+
+                return getScaledBitmap(url, 100, 100);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            super.onPostExecute(result);
+            imageView.setImageBitmap(result);
+        }
     }
 }
