@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="com.simbiosys.avatar.cooknstore.RecipeDetailsView">
+    tools:context="com.poorni.project.cooknstore.RecipeDetailsView">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,6 +22,7 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/appBar"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
@@ -80,6 +83,17 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/shopping_list"
+                        android:src="@drawable/ic_shopping_cart"
+                        android:clickable="true"
+                        android:layout_gravity="center|right"
+                        android:foregroundGravity="center_vertical|right"
+                        android:onClick="onShoppingList"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:src="@drawable/ic_keyboard_arrow_down"
                         android:id="@+id/upArrow"
                         android:layout_gravity="right"
@@ -134,4 +148,5 @@
             </LinearLayout>
             </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
